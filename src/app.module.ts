@@ -6,6 +6,7 @@ import { ChatModule } from './chat/chat.module';
 import { MessageModule } from './message/message.module';
 import { UniversModule } from './univers/univers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CharacterModule } from './character/character.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     database: 'api_chat_DB',
     entities: ['dist/**/*.entity{.ts,.js}'],
     synchronize: false,
-}), UserModule, ChatModule, MessageModule, UniversModule],
+}), UserModule, ChatModule, MessageModule, UniversModule, CharacterModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -5,11 +5,12 @@ import { UniversService } from './univers.service';
 import { Univers } from './universe.entity';
 import { User } from 'src/user/user.entity';
 import { Character } from 'src/character/character.entity';
+import { UserService } from 'src/user/user.service';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Univers, User, Character])],
   controllers: [UniversController],
-  providers: [UniversService],
+  providers: [UniversService, UserService],
 })
 export class UniversModule {}
