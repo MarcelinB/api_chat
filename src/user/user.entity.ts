@@ -1,5 +1,7 @@
 // user.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Chat } from 'src/chat/chat.entity';
+import { Univers } from 'src/univers/universe.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -12,6 +14,10 @@ export class User {
   @Column()
   email: string;
 
+  @Column()
   password: string;
+
+  @OneToMany(() => Univers, univers => univers.user)
+  univers: Univers[];
 
 }

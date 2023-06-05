@@ -2,9 +2,22 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { ChatModule } from './chat/chat.module';
+import { MessageModule } from './message/message.module';
+import { UniversModule } from './univers/univers.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [UserModule],
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'db_user',
+    password: 'db_password',
+    database: 'api_chat_DB',
+    entities: ['dist/**/*.entity{.ts,.js}'],
+    synchronize: true,
+}), UserModule, ChatModule, MessageModule, UniversModule],
   controllers: [AppController],
   providers: [AppService],
 })
