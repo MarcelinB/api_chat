@@ -4,6 +4,7 @@ import { Repository, FindOneOptions } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,18 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const newUser = this.userRepository.create(createUserDto);
+    const { name, email, password } = createUserDto;
+  
+    // Générer un hachage sécurisé du mot de passe
+    const hashedPassword = await bcrypt.hash(password, 10);
+  
+    // Créer un nouvel utilisateur avec le nom, l'email et le mot de passe haché
+    const newUser = this.userRepository.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+  
     return this.userRepository.save(newUser);
   }
 

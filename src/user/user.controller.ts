@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Public } from 'src/auth/constants';
 
 @Controller('users')
 export class UserController {
@@ -24,6 +25,7 @@ export class UserController {
   }
 
   @Post()
+  @Public()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
