@@ -16,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     password: 'db_password',
     database: 'api_chat_DB',
     entities: ['dist/**/*.entity{.ts,.js}'],
-    synchronize: true,
+    synchronize: false,
 }), UserModule, ChatModule, MessageModule, UniversModule],
   controllers: [AppController],
   providers: [AppService],
