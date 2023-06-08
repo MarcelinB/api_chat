@@ -14,7 +14,7 @@ This Api will allow you to create fictional universes and characters, and discus
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your/repo.git
+git clone https://github.com/MarcelinB/api_chat.git
 ```
 
 2. Install dependencies:
