@@ -11,7 +11,7 @@ export class Message {
   @Column({ type: 'timestamp' })
   date: Date;
 
-  @Column()
+  @Column({ length: 1000 })
   content: string;
 
   @Column()
