@@ -1,15 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { OpenAIService } from './openai.service';
 
 @Controller('openai')
 export class OpenAIController {
   constructor(private readonly openaiService: OpenAIService) {}
 
-  @Get('/createCompletion')
-  async createCompletion(): Promise<any> {
-    const test =  await this.openaiService.createCompletion();
-    console.log(test);
-    return test;
-    
+  @Get('/createCompletion/:idCharacter/:idChat')
+  async createCompletion(
+    @Param('idCharacter') idCharacter: number,
+    @Param('idChat') idChat: number
+  ): Promise<any> {
+    console.log(idCharacter, idChat);
+    const generatedMessage = await this.openaiService.createCompletion(idCharacter, idChat);
+    return generatedMessage;
   }
 }

@@ -18,8 +18,8 @@ export class OpenAIService {
 
   }
 
-  async createCompletion(): Promise<any> {
-    const prompt = await this.createPrompt(1, 1);
+  async createCompletion(idCharacter: number, idChat: number): Promise<any> {
+    const prompt = await this.createPrompt(idCharacter, idChat);
     const response = await this.openai.createCompletion({
         model: "text-davinci-003",
         prompt: `${prompt}`,
@@ -30,9 +30,10 @@ export class OpenAIService {
         presence_penalty: 0,
         stop: ["Human:", "AI:"],
       });
-    console.log('MA REPONSON' + response);
+
     const generatedMessage = response.data.choices[0].text;
-    this.messageService.create({
+    console.log(generatedMessage);
+    await this.messageService.create({
       date: new Date(),
       content: generatedMessage,
       isGPTGenerated: true,
