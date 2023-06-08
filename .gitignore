@@ -219,3 +219,4 @@ mysql_data/binlog.000001
 mysql_data/#ib_16384_1.dblwr
 mysql_data/#ib_16384_0.dblwr
 mysql_data/auto.cnf
+mysql_data/binlog.000003

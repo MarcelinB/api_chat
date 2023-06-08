@@ -7,6 +7,9 @@ export class OpenAIController {
 
   @Get('/createCompletion')
   async createCompletion(): Promise<any> {
-    return this.openaiService.createCompletion();
+    const test =  await this.openaiService.createCompletion();
+    console.log(test);
+    return test;
+    
   }
 }

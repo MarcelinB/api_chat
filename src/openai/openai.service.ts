@@ -7,22 +7,21 @@ import { MessageService } from 'src/message/message.service';
 @Injectable()
 export class OpenAIService {
   private openai: OpenAIApi;
-
   constructor(
     private readonly characterService: CharacterService,
     private readonly messageService: MessageService,
   ) {
     const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: ``,
     });
     this.openai = new OpenAIApi(configuration);
 
   }
 
   async createCompletion(): Promise<any> {
-    const prompt = this.createPrompt(1, 1);
+    const prompt = await this.createPrompt(1, 1);
     const response = await this.openai.createCompletion({
-        model: "text-ada-001",
+        model: "text-davinci-003",
         prompt: `${prompt}`,
         temperature: 1,
         max_tokens: 256,
@@ -31,7 +30,15 @@ export class OpenAIService {
         presence_penalty: 0,
         stop: ["Human:", "AI:"],
       });
-    return response;
+    console.log('MA REPONSON' + response);
+    const generatedMessage = response.data.choices[0].text;
+    this.messageService.create({
+      date: new Date(),
+      content: generatedMessage,
+      isGPTGenerated: true,
+      chatId: 1,
+    });
+    return generatedMessage;
   }
 
   async createPrompt(idCharacter: number, idChat: number): Promise<String> {
@@ -49,7 +56,10 @@ export class OpenAIService {
       promptMessage += message.content + '\n';
     }
   
-    const prompt = `${description}\n\n${promptMessage} \n AI:  `;
+    const prompt = `${description}\n\n Dans le cadre d'un jeu de rôle, l'IA devient le personnage de "${character.name}" et répond à l'humain. \n 
+    ${promptMessage} \n AI:  `; 
+
+    console.log(prompt);
     return prompt;
   }
 }
