@@ -1,9 +1,7 @@
-Certainly! Here's the updated README content in English, including the Docker Compose configuration for the database:
 
-```markdown
-# Your Application API
+# ChatAPI
 
-Welcome to the documentation of your application API. This API allows you to perform various operations related to characters, messages, universes, and more. Below you will find information on using the API endpoints and the available resources.
+This Api will allow you to create fictional universes and characters, and discuss them with DaVinci.
 
 ## Prerequisites
 
@@ -113,7 +111,7 @@ The database will be accessible at `localhost:3306`.
 
 - `POST /auth/login`: Authenticate a user and retrieve a JWT token.
 
-For detailed information about each endpoint, including request/response examples, authentication requirements, and more, please refer to the Swagger documentation. The Swagger interface is available at `http://localhost:3000/api-docs`.
+For detailed information about each endpoint, including request/response examples, authentication requirements, and more, please refer to the Swagger documentation. The Swagger interface is available at `http://localhost:3000/api`.
 
 ## Authentication
 
