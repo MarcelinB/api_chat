@@ -1,73 +1,130 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Certainly! Here's the updated README content in English, including the Docker Compose configuration for the database:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+```markdown
+# Your Application API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Welcome to the documentation of your application API. This API allows you to perform various operations related to characters, messages, universes, and more. Below you will find information on using the API endpoints and the available resources.
 
-## Description
+## Prerequisites
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Node.js (version X.X.X)
+- NPM (version X.X.X)
+- Docker (version X.X.X)
 
 ## Installation
 
-```bash
-$ npm install
+1. Clone the repository:
+
+```shell
+git clone https://github.com/your/repo.git
 ```
 
-## Running the app
+2. Install dependencies:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```shell
+cd project-folder
+npm install
 ```
 
-## Test
+3. Configure environment variables:
 
-```bash
-# unit tests
-$ npm run test
+Create a `.env` file in the root directory and configure the following variables:
 
-# e2e tests
-$ npm run test:e2e
+```shell
+# Database connection
+DATABASE_HOST=db
+DATABASE_PORT=3306
+DATABASE_NAME=api_chat_DB
+DATABASE_USER=db_user
+DATABASE_PASSWORD=db_password
 
-# test coverage
-$ npm run test:cov
+# OpenAI API key
+OPENAI_API_KEY=your-openai-api-key
 ```
 
-## Support
+4. Start the application:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```shell
+npm start
+```
 
-## Stay in touch
+The API will be available at `http://localhost:3000`.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Database Configuration (Docker Compose)
 
-## License
+This project uses MySQL as the database. To set up the database using Docker Compose, follow these steps:
 
-Nest is [MIT licensed](LICENSE).
+1. Create a file named `docker-compose.yml` in the project's root directory.
+
+2. Add the following content to the `docker-compose.yml` file:
+
+```yaml
+version: '3.1'
+
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: api_chat_DB
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+```
+
+3. Run the following command to start the database container:
+
+```shell
+docker-compose up -d
+```
+
+The database will be accessible at `localhost:3306`.
+
+## API Endpoints
+
+### Characters
+
+- `GET /characters`: Get all characters.
+- `GET /characters/:id`: Get a specific character by ID.
+- `POST /characters`: Create a new character.
+- `PUT /characters/:id`: Update a character.
+- `DELETE /characters/:id`: Delete a character.
+
+### Messages
+
+- `GET /messages`: Get all messages.
+- `GET /messages/:id`: Get a specific message by ID.
+- `POST /messages`: Create a new message.
+- `PUT /messages/:id`: Update a message.
+- `DELETE /messages/:id`: Delete a message.
+
+### Universes
+
+- `GET /univers`: Get all universes.
+- `GET /univers/:id`: Get a specific universe by ID.
+- `POST /univers`: Create a new universe.
+- `PUT /univers/:id`: Update a universe.
+- `DELETE /univers/:id`: Delete a universe.
+
+### Authentication
+
+- `POST /auth/login`: Authenticate a user and retrieve a JWT token.
+
+For detailed information about each endpoint, including request/response examples, authentication requirements, and more, please refer to the Swagger documentation. The Swagger interface is available at `http://localhost:3000/api-docs`.
+
+## Authentication
+
+This API uses JWT (JSON Web Token) for authentication. To access protected endpoints, include the JWT token in the `Authorization` header of your requests:
+
+```
+Authorization: Bearer <token>
+```
+
+To obtain a token, make a POST request to `/auth/login` with valid credentials.
+
+## Contributions
+
+Contributions are welcome! If you
