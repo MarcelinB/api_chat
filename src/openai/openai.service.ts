@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Configuration, CreateCompletionRequestPrompt, OpenAIApi } from 'openai';
 import { CharacterService } from 'src/character/character.service';
 import { MessageService } from 'src/message/message.service';
+import * as dotenv from 'dotenv';
 
 
 @Injectable()
@@ -11,8 +12,10 @@ export class OpenAIService {
     private readonly characterService: CharacterService,
     private readonly messageService: MessageService,
   ) {
+    dotenv.config();
+    const apiKey = process.env.OPENAI_API_KEY;
     const configuration = new Configuration({
-      apiKey: ``,
+      apiKey: apiKey,
     });
     this.openai = new OpenAIApi(configuration);
 
