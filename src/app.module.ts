@@ -19,7 +19,7 @@ import { OpenAIModule } from './openai/openai.module';
     password: 'root_password',
     database: 'api_chat_DB',
     entities: ['dist/**/*.entity{.ts,.js}'],
-    synchronize: true,
+    synchronize: false,
 }), UserModule, ChatModule, MessageModule, UniversModule, CharacterModule, AuthModule, OpenAIModule],
   controllers: [AppController],
   providers: [AppService, 
