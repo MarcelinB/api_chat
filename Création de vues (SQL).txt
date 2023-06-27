@@ -1,0 +1,18 @@
+CREATE VIEW `view4` AS
+SELECT id, email
+FROM `user`;
+
+CREATE VIEW `view3` AS
+SELECT id, name, description
+FROM `character`;
+
+CREATE VIEW `view2` AS
+SELECT c.id AS character_id, c.name AS character_name, m.content AS message_content
+FROM `character` c
+JOIN `chat` ch ON c.id = ch.characterId
+JOIN `message` m ON ch.id = m.chatId;
+
+CREATE VIEW `view1` AS
+SELECT c.id AS character_id, c.name AS character_name, u.name AS universe_name
+FROM `character` c
+JOIN `univers` u ON c.universId = u.id;

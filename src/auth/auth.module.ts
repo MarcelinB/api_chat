@@ -6,15 +6,15 @@ import { LocalStrategy } from './local.strategy';
 import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
+import { JwtModule } from '@nestjs/jwt';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([
     User,
-  ]), PassportModule, UserModule,  JwtModule.register({
+  ]), PassportModule, UserModule, JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {  },
     }),],

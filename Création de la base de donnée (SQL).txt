@@ -1,0 +1,73 @@
+Création de la base de donnée : 
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `character`;
+CREATE TABLE `character`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `universId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_cedee5f1f2b118afc97de4eb4d9`(`universId` ASC) USING BTREE,
+  CONSTRAINT `FK_cedee5f1f2b118afc97de4eb4d9` FOREIGN KEY (`universId`) REFERENCES `univers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `character_chats_chat`;
+CREATE TABLE `character_chats_chat`  (
+  `characterId` int NOT NULL,
+  `chatId` int NOT NULL,
+  PRIMARY KEY (`characterId`, `chatId`) USING BTREE,
+  INDEX `IDX_f41f7d9b13cfddd84c14a2e036`(`characterId` ASC) USING BTREE,
+  INDEX `IDX_0f59d2a279eb862d889901ba0c`(`chatId` ASC) USING BTREE,
+  CONSTRAINT `FK_0f59d2a279eb862d889901ba0ce` FOREIGN KEY (`chatId`) REFERENCES `chat` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_f41f7d9b13cfddd84c14a2e0367` FOREIGN KEY (`characterId`) REFERENCES `character` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `chat`;
+CREATE TABLE `chat`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `characterId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_ff0cf5bec0fa249ed84a1a9d35b`(`characterId` ASC) USING BTREE,
+  CONSTRAINT `FK_ff0cf5bec0fa249ed84a1a9d35b` FOREIGN KEY (`characterId`) REFERENCES `character` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date` timestamp NOT NULL,
+  `isGPTGenerated` tinyint NOT NULL,
+  `chatId` int NULL DEFAULT NULL,
+  `content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_619bc7b78eba833d2044153bacc`(`chatId` ASC) USING BTREE,
+  CONSTRAINT `FK_619bc7b78eba833d2044153bacc` FOREIGN KEY (`chatId`) REFERENCES `chat` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `univers`;
+CREATE TABLE `univers`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `userId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_bbb4d70e03796082c28a058cf04`(`userId` ASC) USING BTREE,
+  CONSTRAINT `FK_bbb4d70e03796082c28a058cf04` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;

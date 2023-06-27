@@ -1,0 +1,40 @@
+Requete avec jointure : 
+
+SELECT c.name AS character_name, u.name AS universe_name
+FROM `character` c
+JOIN `univers` u ON c.universId = u.id;
+
+Requete avec group by : 
+SELECT u.name AS universe_name, COUNT(c.id) AS character_count
+FROM `univers` u
+LEFT JOIN `character` c ON u.id = c.universId
+GROUP BY u.name;
+
+Requete avec having: 
+SELECT u.name AS universe_name, COUNT(c.id) AS character_count
+FROM `univers` u
+LEFT JOIN `character` c ON u.id = c.universId
+GROUP BY u.name
+HAVING COUNT(c.id) > 2;
+
+Requete corrélée: 
+SELECT c1.name AS character_name, c1.universId
+FROM `character` c1
+WHERE c1.universId IN (
+  SELECT c2.universId
+  FROM `character` c2
+  WHERE c2.name = 'John'
+);
+
+Requetes avec IF :
+SELECT id, name, description,
+  IF(description <> '', 'Description available', 'No description') AS description_status
+FROM `character`;
+
+Requetes avec Case :
+SELECT id, name, description,
+  CASE
+    WHEN description <> '' THEN 'Description available'
+    ELSE 'No description'
+  END AS description_status
+FROM `character`;

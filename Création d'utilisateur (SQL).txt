@@ -1,0 +1,5 @@
+INSERT INTO `user` (`name`, `email`, `password`)
+VALUES ('AAA', 'aaae@example.com', 'password123');
+
+INSERT INTO `user` (`name`, `email`, `password`)
+VALUES ('Jane Smith', 'janesmith@example.com', 'pass456');
