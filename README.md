@@ -122,7 +122,3 @@ Authorization: Bearer <token>
 ```
 
 To obtain a token, make a POST request to `/auth/login` with valid credentials.
-
-## Contributions
-
-Contributions are welcome! If you
